@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Add a new engine</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="engineFormGroup">
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Horse Power</mat-label>
+            <input type="number" formControlName="horsePower" matInput placeholder="Horse Power" />
+            <mat-error *ngIf="horsePower?.errors?.['required']">The power is required!</mat-error>
+            <mat-error *ngIf="horsePower?.errors?.['min']">The minimum power is 50 Hp</mat-error>
+            <mat-error *ngIf="horsePower?.errors?.['max']">The maximum power is 1500Hp</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Torque</mat-label>
+            <input type="number" formControlName="torque" matInput placeholder="Torque" />
+            <mat-error *ngIf="torque?.errors?.['required']">The torque is required!</mat-error>
+            <mat-error *ngIf="torque?.errors?.['min']">The minimum torque is 40 Hp</mat-error>
+            <mat-error *ngIf="torque?.errors?.['max']">The maximum torque is 1500Hp</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Fuel Engine</mat-label>
+            <mat-select formControlName="fuelEngine">
+                <mat-option value="null">It doesn't have one</mat-option>
+                <mat-option *ngFor="let item of fuelEngines" [value]="item.id">{{
+                    item | fuelEngineToString
+                }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="fuelEngine?.errors?.['required']">The fuel engine is required!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Electric Engine</mat-label>
+            <mat-select formControlName="electricEngine">
+                <mat-option value="null">It doesn't have one</mat-option>
+                <mat-option *ngFor="let item of electricEngines" [value]="item.id">{{
+                    item | electricEngineToString
+                }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="electricEngine?.errors?.['required']">The electric engine is required!</mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button cdkFocusInitial mat-dialog-close>Cancel</button>
+    <button mat-button (click)="addEngine()" [disabled]="engineFormGroup.invalid" *ngIf="!data">Add</button>
+    <button mat-button (click)="editEngine()" [disabled]="engineFormGroup.invalid" *ngIf="data">Edit</button>
+</mat-dialog-actions>

@@ -1,0 +1,45 @@
+.page-container {
+    margin: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.menu-card {
+    width: 400px;
+    min-height: 100px;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Fantasy";
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+img {
+    padding: 16px 26px 16px 16px;
+    width: 72px;
+    height: 54px;
+}
+
+.card-content {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+mat-card-title {
+    font-size: 30px;
+    font-weight: bolder;
+    color: #dee2ae;
+    margin-bottom: 20px;
+}
+
+mat-card-subtitle {
+    font-size: 20px;
+    font-weight: bolder;
+    color: #c8e7ed;
+}

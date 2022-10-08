@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Add a new Electric Engine</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="formGroup">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+                <mat-option value="DCSM">DC Series Motor</mat-option>
+                <mat-option value="BDCM">Brushless DC Motor</mat-option>
+                <mat-option value="SRM">Switched Reluctance Motors</mat-option>
+            </mat-select>
+            <mat-error *ngIf="type?.errors?.['required']">The type is required!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Battery Capacity kWh</mat-label>
+            <input type="number" formControlName="batteryCapacity" matInput placeholder="Battery Capacity kWh" />
+            <mat-error *ngIf="batteryCapacity?.errors?.['required']">The battery capacity is required!</mat-error>
+            <mat-error *ngIf="batteryCapacity?.errors?.['min']">The minimum capacity is 17kWh</mat-error>
+            <mat-error *ngIf="batteryCapacity?.errors?.['max']">The maximum capacity is 100kWh</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Range KM</mat-label>
+            <input type="number" formControlName="motorRange" matInput placeholder="Range KM" />
+            <mat-error *ngIf="motorRange?.errors?.['required']">The range is required!</mat-error>
+            <mat-error *ngIf="motorRange?.errors?.['min']">The minimum range is 135km</mat-error>
+            <mat-error *ngIf="motorRange?.errors?.['max']">The maximum range is 800km</mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial (click)="addElectricEngine()" [disabled]="formGroup.invalid" *ngIf="!data">
+        Add
+    </button>
+    <button mat-button (click)="editElectricEngine()" [disabled]="formGroup.invalid" *ngIf="data">Edit</button>
+</mat-dialog-actions>

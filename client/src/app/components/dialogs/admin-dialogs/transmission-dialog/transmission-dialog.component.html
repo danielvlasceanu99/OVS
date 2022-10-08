@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Add a new Transmission</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="transmissionFormGroup">
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>No of gears</mat-label>
+            <input type="number" formControlName="numberOfGears" matInput placeholder="No of gears" />
+            <mat-error *ngIf="numberOfGears?.errors?.['required']">The number of gears is required!</mat-error>
+            <mat-error *ngIf="numberOfGears?.errors?.['min']">The minimum number of gears is 1</mat-error>
+            <mat-error *ngIf="numberOfGears?.errors?.['max']">The maximum number of gears is 15</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Transmission Type</mat-label>
+            <mat-select formControlName="transmissionType">
+                <mat-option value="MANUAL">MANUAL</mat-option>
+                <mat-option value="AUTOMATIC">AUTOMATIC</mat-option>
+                <mat-option value="DUALCLUTCH">DUALCLUTCH</mat-option>
+            </mat-select>
+            <mat-error *ngIf="transmissionType?.errors?.['required']">The transmision type is required!</mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button cdkFocusInitial mat-dialog-close>Cancel</button>
+    <button mat-button (click)="addTransmission()" [disabled]="transmissionFormGroup.invalid" *ngIf="!data">Add</button>
+    <button mat-button (click)="editTransmission()" [disabled]="transmissionFormGroup.invalid" *ngIf="data">
+        Edit
+    </button>
+</mat-dialog-actions>

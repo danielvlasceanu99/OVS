@@ -1,0 +1,68 @@
+<div class="container">
+    <mat-card class="tabs-container" *ngIf="postLoaded && enginesLoaded && transmisionsLoaded">
+        <mat-card-title class="redirect">{{ post?.car?.brand }} {{ post?.car?.model }}</mat-card-title>
+        <mat-card-content>
+            <form class="form-config-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Engine</mat-label>
+                    <mat-select
+                        (selectionChange)="engineChange($event)"
+                        [(ngModel)]="carModel.engineId"
+                        [ngModelOptions]="{ standalone: true }"
+                    >
+                        <mat-option *ngFor="let item of engines" [value]="item.id">{{
+                            item | engineToString
+                        }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Transmission</mat-label>
+                    <mat-select
+                        (selectionChange)="transmissionChange($event)"
+                        [(ngModel)]="carModel.transmissionId"
+                        [ngModelOptions]="{ standalone: true }"
+                    >
+                        <mat-option *ngFor="let item of transmissions" [value]="item.id">{{
+                            item | transmissionToString
+                        }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Traction type</mat-label>
+                    <mat-select
+                        (selectionChange)="tractionChange($event)"
+                        [(ngModel)]="carModel.traction"
+                        [ngModelOptions]="{ standalone: true }"
+                    >
+                        <mat-option *ngFor="let item of tractionType" [value]="item">{{ item }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Color</mat-label>
+                    <mat-select
+                        (selectionChange)="colorChange($event)"
+                        [(ngModel)]="carModel.color"
+                        [ngModelOptions]="{ standalone: true }"
+                    >
+                        <mat-option *ngFor="let item of color" [value]="item">{{ item }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions class="button-container" *ngIf="isLogedin">
+            <button mat-raised-button color="primary" (click)="buyOnline()">Buy online</button>
+        </mat-card-actions>
+        <mat-card-actions class="button-container" *ngIf="!isLogedin">
+            <h2 class="redirect">Log In to buy or reserve a car</h2>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="wheel-container">
+        <mat-card-content>
+            <mat-tab-group headerPosition="below" animationDuration="1000ms">
+                <mat-tab color="primary" *ngFor="let img of imgCollection" label="{{ img.title }}">
+                    <img class="center" src="{{ img.image }}" alt="img.title" />
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Add a new post</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="formGroup">
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Title</mat-label>
+            <input type="text" formControlName="title" [disabled]="true" matInput placeholder="Title" />
+            <mat-error *ngIf="title?.errors?.['required']"> Title is required </mat-error>
+            <mat-error *ngIf="title?.errors?.['minlength']"> Title must be at least 5 characters long. </mat-error>
+            <mat-error *ngIf="title?.errors?.['maxlenght']"> Title cannot be more than 255 characters long. </mat-error>
+            <mat-error *ngIf="title?.errors?.['pathern']"> Title must be alphanumeric. </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea formControlName="description" matInput></textarea>
+            <mat-error *ngIf="description?.errors?.['required']"> Description is required </mat-error>
+            <mat-error *ngIf="description?.errors?.['minlength']">
+                Description must be at least 5 characters long.
+            </mat-error>
+            <mat-error *ngIf="description?.errors?.['maxlenght']">
+                Description cannot be more than 255 characters long.
+            </mat-error>
+            <mat-hint align="end">{{ description?.value?.length }}/255</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Price</mat-label>
+            <input type="number" formControlName="price" matInput placeholder="Price" />
+            <mat-error *ngIf="price?.errors?.['required']"> Price is required </mat-error>
+            <mat-error *ngIf="price?.errors?.['min']"> Price must be at least 0. </mat-error>
+            <mat-error *ngIf="price?.errors?.['max']"> Price cannot be more than 1000000. </mat-error>
+            <mat-error *ngIf="price?.errors?.['pattern']"> Price must be a number. </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Car</mat-label>
+            <mat-select (selectionChange)="selectTitle($event)" formControlName="car">
+                <mat-option *ngFor="let item of cars" [value]="item">{{ item.brand }} {{ item.model }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="car?.errors?.['required']"> Car is required </mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial [disabled]="formGroup.invalid" (click)="addPost()" *ngIf="!data">Add</button>
+    <button mat-button (click)="edit()" [disabled]="formGroup.invalid" *ngIf="data">Edit</button>
+</mat-dialog-actions>

@@ -1,0 +1,95 @@
+<h2 mat-dialog-title>Add a new Car</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="formGroup">
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Brand</mat-label>
+            <input type="text" formControlName="brand" matInput placeholder="Brand" />
+            <mat-error *ngIf="brand?.errors?.['required']"> The brand is required! </mat-error>
+            <mat-error *ngIf="brand?.errors?.['min']"> The minimum length is 3 characters! </mat-error>
+            <mat-error *ngIf="brand?.errors?.['max']"> The maximum length is 20 characters! </mat-error>
+            <mat-error *ngIf="brand?.errors?.['patter']"> The brand can only contain letters and numbers! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Model</mat-label>
+            <input type="text" formControlName="model" matInput placeholder="Model" />
+            <mat-error *ngIf="model?.errors?.['required']"> The model is required! </mat-error>
+            <mat-error *ngIf="model?.errors?.['min']"> The minimum length is 3 characters! </mat-error>
+            <mat-error *ngIf="model?.errors?.['max']"> The maximum length is 20 characters! </mat-error>
+            <mat-error *ngIf="model?.errors?.['patter']"> The model can only contain letters and numbers! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Available</mat-label>
+            <input type="number" formControlName="available" matInput placeholder="Available" />
+            <mat-error *ngIf="available?.errors?.['required']"> The available is required! </mat-error>
+            <mat-error *ngIf="available?.errors?.['min']"> The minimum available is 1! </mat-error>
+            <mat-error *ngIf="available?.errors?.['max']"> The maximum available is 100! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Manufacturing Year</mat-label>
+            <input type="number" formControlName="manufacturingYear" matInput placeholder="manufacturing Year" />
+            <mat-error *ngIf="manufacturingYear?.errors?.['required']"> The manufacturing year is required! </mat-error>
+            <mat-error *ngIf="manufacturingYear?.errors?.['min']"> The minimum manufacturing year is 2019! </mat-error>
+            <mat-error *ngIf="manufacturingYear?.errors?.['max']"> The maximum manufacturing year is 2023! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Engine Id</mat-label>
+            <mat-select formControlName="engine">
+                <mat-option *ngFor="let item of engineList" [value]="item.id">{{ item | engineToString }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="engine?.errors?.['required']"> The engine is required! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Transmission Id</mat-label>
+            <mat-select formControlName="transmission">
+                <mat-option *ngFor="let item of transmissionList" [value]="item.id">{{
+                    item | transmissionToString
+                }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="transmission?.errors?.['required']"> The transmission is required! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Number of Doors</mat-label>
+            <input type="number" formControlName="numberOfDoors" matInput placeholder="Number of Doors" />
+            <mat-error *ngIf="numberOfDoors?.errors?.['required']"> The number of doors is required! </mat-error>
+            <mat-error *ngIf="numberOfDoors?.errors?.['min']"> The minimum number of doors is 1! </mat-error>
+            <mat-error *ngIf="numberOfDoors?.errors?.['max']"> The maximum number of doors is 5! </mat-error>
+            <mat-error *ngIf="numberOfDoors?.errors?.['patter']"> This field can only contain numbers! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Color</mat-label>
+            <mat-select formControlName="color">
+                <mat-option *ngFor="let item of colorList" [value]="item">{{ item }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="color?.errors?.['required']"> The color is required! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Car Type</mat-label>
+            <mat-select formControlName="carType">
+                <mat-option *ngFor="let item of carTypeList" [value]="item">{{ item }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="carType?.errors?.['required']"> The car type is required! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Traction Type</mat-label>
+            <mat-select formControlName="tractionType">
+                <mat-option *ngFor="let item of tractionTypeList" [value]="item">{{ item }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="tractionType?.errors?.['required']"> The traction type is required! </mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+    <button mat-button (click)="addCar()" [disabled]="formGroup.invalid" *ngIf="!data">Add</button>
+    <button mat-button (click)="edit()" [disabled]="formGroup.invalid" *ngIf="data">Edit</button>
+</mat-dialog-actions>

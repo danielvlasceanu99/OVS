@@ -1,0 +1,97 @@
+<h2 mat-dialog-title>Add a new ICE Engine</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="fuelEngineFormGroup">
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Fuel consumption</mat-label>
+            <input type="number" formControlName="fuelConsumption" matInput placeholder="Fuel consumption" />
+            <mat-error *ngIf="fuelConsumption?.errors?.['required']"> Fuel consumption is required! </mat-error>
+            <mat-error *ngIf="fuelConsumption?.errors?.['min']"> Fuel consumption must be above 0! </mat-error>
+            <mat-error *ngIf="fuelConsumption?.errors?.['max']"> Fuel consumption must be below 40! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>CO2 emissions</mat-label>
+            <input type="number" formControlName="co2Emissions" matInput placeholder="CO2 emissions" />
+            <mat-error *ngIf="co2Emissions?.errors?.['required']"> CO2 emission is required! </mat-error>
+            <mat-error *ngIf="co2Emissions?.errors?.['min']"> CO2 emission must be above 0! </mat-error>
+            <mat-error *ngIf="co2Emissions?.errors?.['max']"> CO2 emission must be below 250! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Displacement</mat-label>
+            <input type="number" formControlName="displacement" matInput placeholder="Displacement" />
+            <mat-error *ngIf="displacement?.errors?.['required']"> Displacement is required! </mat-error>
+            <mat-error *ngIf="displacement?.errors?.['min']"> Displacement must be above 0! </mat-error>
+            <mat-error *ngIf="displacement?.errors?.['max']"> Displacement must be below 16! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Fuel type</mat-label>
+            <mat-select formControlName="fuelType">
+                <mat-option value="GASOLINE">GASOLINE</mat-option>
+                <mat-option value="DIESEL">DIESEL</mat-option>
+                <mat-option value="LPG">LPG</mat-option>
+                <mat-option value="METHANOL">METHANOL</mat-option>
+                <mat-option value="ETHANOL">ETHANOL</mat-option>
+            </mat-select>
+            <mat-error *ngIf="fuelType?.errors?.['required']"> The field is required! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Engine Layout</mat-label>
+            <mat-select formControlName="engineLayout">
+                <mat-option value="INLINE">INLINE</mat-option>
+                <mat-option value="V">V</mat-option>
+                <mat-option value="VR">VR</mat-option>
+                <mat-option value="W">W</mat-option>
+                <mat-option value="H">H</mat-option>
+                <mat-option value="U">U</mat-option>
+                <mat-option value="ROTARY">ROTARY</mat-option>
+                <mat-option value="BOXER">BOXER</mat-option>
+            </mat-select>
+            <mat-error *ngIf="engineLayout?.errors?.['required']"> The field is required! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Stroke Type</mat-label>
+            <mat-select formControlName="strokeType">
+                <mat-option value="TWO_STROKE">TWO STROKE</mat-option>
+                <mat-option value="FOUR_STROKE">FOUR STROKE</mat-option>
+            </mat-select>
+            <mat-error *ngIf="strokeType?.errors?.['required']"> The field is required! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>No of cylinders</mat-label>
+            <input type="number" formControlName="numberOfCylinders" matInput placeholder="No of cylinders" />
+            <mat-error *ngIf="numberOfCylinders?.errors?.['required']"> The field is required! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Turbine</mat-label>
+            <mat-select formControlName="turbine">
+                <mat-option [value]="true">YES</mat-option>
+                <mat-option [value]="false">NO</mat-option>
+            </mat-select>
+            <mat-error *ngIf="turbine?.errors?.['required']"> The field is required! </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Supercharger</mat-label>
+            <mat-select formControlName="supercharge">
+                <mat-option [value]="true">YES</mat-option>
+                <mat-option [value]="false">NO</mat-option>
+            </mat-select>
+            <mat-error *ngIf="supercharge?.errors?.['required']"> The field is required! </mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+    <button mat-button (click)="addFosilFuelEngine()" [disabled]="fuelEngineFormGroup.invalid" *ngIf="!data">
+        Add
+    </button>
+    <button mat-button (click)="editFosilFuelEngine()" [disabled]="fuelEngineFormGroup.invalid" *ngIf="data">
+        Edit
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,74 @@
+<div class="page-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="#">
+            <th mat-header-cell *matHeaderCellDef class="header">No.</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="brand">
+            <th mat-header-cell *matHeaderCellDef class="header">Brand</th>
+            <td mat-cell *matCellDef="let element">{{ element.brand }}</td>
+        </ng-container>
+        <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef class="header">Model</th>
+            <td mat-cell *matCellDef="let element">{{ element.model }}</td>
+        </ng-container>
+        <ng-container matColumnDef="available">
+            <th mat-header-cell *matHeaderCellDef class="header">Available</th>
+            <td mat-cell *matCellDef="let element">{{ element.available }}</td>
+        </ng-container>
+        <ng-container matColumnDef="manufacturingYear">
+            <th mat-header-cell *matHeaderCellDef class="header">Manufacturing Year</th>
+            <td mat-cell *matCellDef="let element">{{ element.manufacturingYear }}</td>
+        </ng-container>
+        <ng-container matColumnDef="engine">
+            <th mat-header-cell *matHeaderCellDef class="header">Engine</th>
+            <td mat-cell *matCellDef="let element">
+                {{ "id:" + element.engine.id }} {{ element.engine.horsePower + "hp" }}
+                {{ element.engine.torque + "Nm" }}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="transmission">
+            <th mat-header-cell *matHeaderCellDef class="header">Transmission</th>
+            <td mat-cell *matCellDef="let element">{{ element.transmission | transmissionToString }}</td>
+        </ng-container>
+        <ng-container matColumnDef="numberOfDoors">
+            <th mat-header-cell *matHeaderCellDef class="header">Number Of Doors</th>
+            <td mat-cell *matCellDef="let element">{{ element.numberOfDoors }}</td>
+        </ng-container>
+        <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef class="header">Color</th>
+            <td mat-cell *matCellDef="let element">{{ element.color }}</td>
+        </ng-container>
+        <ng-container matColumnDef="carType">
+            <th mat-header-cell *matHeaderCellDef class="header">Car Type</th>
+            <td mat-cell *matCellDef="let element">{{ element.carType }}</td>
+        </ng-container>
+        <ng-container matColumnDef="tractionType">
+            <th mat-header-cell *matHeaderCellDef class="header">Traction Type</th>
+            <td mat-cell *matCellDef="let element">{{ element.tractionType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="header">Actions</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-stroked-button color="primary" class="space-right" (click)="edit(element.id)">Edit</button>
+                <button mat-stroked-button color="primary" (click)="delete(element.id)">Delete</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <div class="fab-button">
+        <button
+            mat-fab
+            color="primary"
+            title="Add new car"
+            aria-label="Example icon button with a heart icon"
+            (click)="addCar()"
+        >
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>

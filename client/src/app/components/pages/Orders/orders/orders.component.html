@@ -1,0 +1,23 @@
+<div class="orders" *ngIf="orders">
+    <mat-card class="example-card" *ngFor="let order of orders">
+        <mat-card-header>
+            <mat-card-title>Car: {{ order.post?.car?.brand }} {{ order.post?.car?.model }}</mat-card-title>
+            <mat-card-subtitle>Price: {{ order.price }}$</mat-card-subtitle>
+            <mat-card-subtitle>Purchase date: {{ order.date }}</mat-card-subtitle>
+        </mat-card-header>
+        <img
+            *ngIf="order.post?.images"
+            mat-card-image
+            src="../../../../../assets/images/caravatar.png"
+            alt="Placeholder"
+        />
+        <mat-card-content>
+            <p>
+                {{ order.post?.description }}
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="no-orders" *ngIf="orders.length == 0">
+    <h2>No orders</h2>
+</div>

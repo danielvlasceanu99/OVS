@@ -1,0 +1,94 @@
+<div class="details">
+    <div class="general-details-container">
+        <div class="title">{{ post?.title }}</div>
+        <div class="main">{{ post?.car?.brand }} {{ post?.car?.model }}</div>
+        <div class="main">
+            <p class="price">&euro;{{ post?.price }}</p>
+        </div>
+        <div class="secondary">Manufacturing year: {{ post?.car?.manufacturingYear }}</div>
+        <div class="secondary">Color: {{ post?.car?.color }}</div>
+        <div class="secondary">Number of doors: {{ post?.car?.numberOfDoors }}</div>
+        <div class="secondary">Car type: {{ post?.car?.carType }}</div>
+        <div class="secondary">Tracion type: {{ post?.car?.tractionType }}</div>
+        <div class="actions" *ngIf="isLogedin">
+            <button mat-raised-button color="primary" (click)="buyOnline()">BUY ONLINE</button>
+            <button mat-raised-button color="primary" class="spaced" (click)="reserve()">RESERVE IN STORE</button>
+        </div>
+        <div *ngIf="!isLogedin">
+            <h2 class="redirect">Log In to buy or reserve a car</h2>
+        </div>
+    </div>
+    <mat-tab-group headerPosition="below" class="carousel" animationDuration="1000ms">
+        <mat-tab *ngFor="let img of imgCollection" label="{{ img.title }}">
+            <img class="center" src="{{ img.image }}" alt="img.title" />
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<div class="details">
+    <mat-progress-bar mode="indeterminate" *ngIf="!loaded"></mat-progress-bar>
+    <div class="details-content left" *ngIf="loaded">
+        <table mat-table [dataSource]="engineDataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="key">
+                <th mat-header-cell *matHeaderCellDef><div class="main">Horse Power & Torque</div></th>
+                <td mat-cell *matCellDef="let element">{{ element.key }}</td>
+            </ng-container>
+            <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <table mat-table [dataSource]="transmisionDataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="key">
+                <th mat-header-cell *matHeaderCellDef><div class="main">Transmision</div></th>
+                <td mat-cell *matCellDef="let element">{{ element.key }}</td>
+            </ng-container>
+            <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+    </div>
+    <div class="details-content right" *ngIf="loaded">
+        <table
+            mat-table
+            [dataSource]="fuelEgineDataSource"
+            *ngIf="post?.car?.engine?.fuelEngine != null"
+            class="mat-elevation-z8"
+        >
+            <ng-container matColumnDef="key">
+                <th mat-header-cell *matHeaderCellDef><div class="main">Engine</div></th>
+                <td mat-cell *matCellDef="let element">{{ element.key }}</td>
+            </ng-container>
+            <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <table
+            mat-table
+            [dataSource]="electricEngineDataSource"
+            *ngIf="post?.car?.engine?.electricEngine != null"
+            class="mat-elevation-z8"
+        >
+            <ng-container matColumnDef="key">
+                <th mat-header-cell *matHeaderCellDef><div class="main">Engine</div></th>
+                <td mat-cell *matCellDef="let element">{{ element.key }}</td>
+            </ng-container>
+            <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+    </div>
+</div>

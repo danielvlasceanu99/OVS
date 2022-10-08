@@ -1,0 +1,127 @@
+<mat-card class="auth-container">
+    <mat-card-title>Authentication</mat-card-title>
+    <mat-card-subtitle>Log in or create a new account!</mat-card-subtitle>
+    <mat-card-content>
+        <mat-tab-group mat-align-tabs="center" animationDuration="1200ms">
+            <mat-tab label="LOG IN">
+                <form class="login-form" [formGroup]="formGroup">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="usernameFormControl" placeholder="Email" />
+                        <mat-hint align="end">{{ usernameCtrl?.value.length }}/100</mat-hint>
+                        <mat-error *ngIf="usernameCtrl?.errors?.['minlength']">
+                            Email must have at least 10 letters!
+                        </mat-error>
+                        <mat-error *ngIf="usernameCtrl?.errors?.['maxlength']">
+                            Email must have less than 100 characters!
+                        </mat-error>
+                        <mat-error *ngIf="usernameCtrl?.errors?.['required']"> The Email is required! </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" formControlName="passwordFormControl" placeholder="Password" />
+                        <mat-hint align="end">{{ passwordCtrl?.value.length }}/60</mat-hint>
+
+                        <mat-error *ngIf="passwordCtrl?.errors?.['minlength']">
+                            The password must have at least 3 letters!
+                        </mat-error>
+
+                        <mat-error *ngIf="passwordCtrl?.errors?.['maxlength']">
+                            The password must have less than 60 letters!
+                        </mat-error>
+
+                        <mat-error *ngIf="passwordCtrl?.errors?.['required']"> The password is required! </mat-error>
+                    </mat-form-field>
+                </form>
+
+                <div class="buttons-container">
+                    <button mat-button [disabled]="formGroup.invalid" (click)="login()">LOGIN</button>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="REGISTER">
+                <form class="register-form" [formGroup]="registerGroup">
+                    <mat-form-field appearance="outline">
+                        <mat-label>First name</mat-label>
+                        <input matInput formControlName="firstNameFormControl" placeholder="First name" />
+                        <mat-hint align="end">{{ firstNameCtrl?.value.length }}/100</mat-hint>
+                        <mat-error *ngIf="firstNameCtrl?.errors?.['minlength']">
+                            First Name must have at least 2 letters!
+                        </mat-error>
+                        <mat-error *ngIf="firstNameCtrl?.errors?.['maxlength']">
+                            First Name must have less than 100 characters!
+                        </mat-error>
+                        <mat-error *ngIf="firstNameCtrl?.errors?.['required']"> First Name is required! </mat-error>
+                        <mat-error *ngIf="firstNameCtrl?.errors?.['pattern']">
+                            First Name must have only letters!
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Last name</mat-label>
+                        <input matInput formControlName="lastNameFormControl" placeholder="Last name" />
+                        <mat-hint align="end">{{ lastNameCtrl?.value.length }}/100</mat-hint>
+                        <mat-error *ngIf="lastNameCtrl?.errors?.['minlength']">
+                            Last Name must have at least 2 letters!
+                        </mat-error>
+                        <mat-error *ngIf="lastNameCtrl?.errors?.['maxlength']">
+                            Last Name must have less than 100 characters!
+                        </mat-error>
+                        <mat-error *ngIf="lastNameCtrl?.errors?.['required']"> Last Name is required! </mat-error>
+                        <mat-error *ngIf="lastNameCtrl?.errors?.['pattern']">
+                            Last Name must have only letters!
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="emailFormControl" placeholder="Email" />
+                        <mat-hint align="end">{{ emailFormCtrl?.value.length }}/80</mat-hint>
+                        <mat-error *ngIf="emailFormCtrl?.errors?.['minlength']">
+                            Email must have at least 10 letters!
+                        </mat-error>
+                        <mat-error *ngIf="emailFormCtrl?.errors?.['maxlength']">
+                            Email must have less than 80 characters!
+                        </mat-error>
+                        <mat-error *ngIf="emailFormCtrl?.errors?.['required']"> Email is required! </mat-error>
+                        <mat-error *ngIf="emailFormCtrl?.errors?.['email']"> Email is not valid! </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" formControlName="passwordRFormControl" placeholder="Password" />
+                        <mat-hint align="end">{{ passwordRFormCtrl?.value.length }}/60</mat-hint>
+                        <mat-error *ngIf="passwordRFormCtrl?.errors?.['minlength']">
+                            Password must have at least 8 letters!
+                        </mat-error>
+                        <mat-error *ngIf="passwordRFormCtrl?.errors?.['maxlength']">
+                            Password must have less than 60 characters!
+                        </mat-error>
+                        <mat-error *ngIf="passwordRFormCtrl?.errors?.['required']"> Password is required! </mat-error>
+                        <mat-error *ngIf="passwordRFormCtrl?.errors?.['pattern']">
+                            Password must contain at least 1 number, 1 Upercase letter and 1 lowercase letter!
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Confirm password</mat-label>
+                        <input
+                            matInput
+                            type="password"
+                            formControlName="confirmPasswordFormControl"
+                            placeholder="Confirm password"
+                        />
+                        <mat-hint align="end">{{ confirmPasswordFormCtrl?.value.length }}/60</mat-hint>
+                        <mat-error *ngIf="!passwordMatch()"> Password does not match! </mat-error>
+                        <mat-error *ngIf="confirmPasswordFormCtrl?.errors?.['required']">
+                            Confirm password is required!
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+
+                <div class="buttons-container">
+                    <button mat-button (click)="register()" [disabled]="registerGroup.invalid || !passwordMatch()">
+                        Register
+                    </button>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,19 @@
+.example-form {
+    max-width: 500px;
+    width: 100%;
+}
+  
+.example-full-width {
+    width: 100%;
+}
+
+.field-group{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.field-group .field{
+    width: 50%;
+}
+  

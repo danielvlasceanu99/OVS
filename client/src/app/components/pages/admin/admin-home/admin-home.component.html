@@ -1,0 +1,13 @@
+<div class="page-container">
+  <mat-card *ngFor="let page of pages" class="menu-card" (click)="goToPage(page.pageUrl)">
+    <div class="card-content">
+      <div>
+        <img src="{{ page.url }}" />
+      </div>
+      <div>
+        <mat-card-title>{{ page.title }}</mat-card-title>
+        <mat-card-subtitle>{{ page.content }}</mat-card-subtitle>
+      </div>
+    </div>
+  </mat-card>
+</div>

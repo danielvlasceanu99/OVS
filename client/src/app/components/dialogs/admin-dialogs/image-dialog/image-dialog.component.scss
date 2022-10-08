@@ -1,0 +1,43 @@
+.full-width {
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.no-image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 4px #555555;
+  border-radius: 5px;
+  border-style: dashed;
+  height: 300px;
+
+  .placeholder-image {
+    font-size: 128px;
+    line-height: 128px;
+    height: 128px;
+    width: 128px;
+  }
+}
+
+.image-container {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  height: 300px;
+
+  img {
+    max-width: 450px;
+    max-height: 300px;
+  }
+
+}

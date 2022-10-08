@@ -1,0 +1,16 @@
+.login-form, .register-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+
+
+.auth-container {
+    margin: auto;
+    margin-top: 30px;
+    max-width: 500px;
+    height: fit-content;
+    max-height: 550px;
+}

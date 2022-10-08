@@ -1,0 +1,35 @@
+<div class="banner">
+    <img class="banner-image" src="../../../../assets/images/banner.png" />
+</div>
+
+<div class="search-filter-container">
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title> Searching and filtering </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="search-container">
+            <mat-form-field class="search" appearance="fill">
+                <mat-label>
+                    <mat-icon id="search-icon"> search </mat-icon>
+                    Search
+                </mat-label>
+                <input type="text" matInput placeholder="Search" [(ngModel)]="searchText" (change)="filterPosts()" />
+            </mat-form-field>
+        </div>
+    </mat-expansion-panel>
+</div>
+
+<div class="post-container">
+    <app-post *ngFor="let item of posts" [post]="item"></app-post>
+</div>
+
+<div class="paginator-container">
+    <mat-paginator
+        [length]="count"
+        [pageSize]="9"
+        (page)="onPageChange($event)"
+        aria-label="Get posts"
+        [pageIndex]="pageIndex"
+    ></mat-paginator>
+</div>

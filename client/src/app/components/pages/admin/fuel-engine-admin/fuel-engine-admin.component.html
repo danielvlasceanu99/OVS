@@ -1,0 +1,81 @@
+<div class="page-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="#">
+            <th mat-header-cell *matHeaderCellDef class="header">No.</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Fuel consumption">
+            <th mat-header-cell *matHeaderCellDef class="header">Consumption</th>
+            <td mat-cell *matCellDef="let element">{{ element.fuelConsumption }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="CO2 emissions">
+            <th mat-header-cell *matHeaderCellDef class="header">CO2 emissions</th>
+            <td mat-cell *matCellDef="let element">{{ element.co2Emissions }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Displacement">
+            <th mat-header-cell *matHeaderCellDef class="header">Displacement</th>
+            <td mat-cell *matCellDef="let element">{{ element.displacement }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Fuel type">
+            <th mat-header-cell *matHeaderCellDef class="header">Fuel type</th>
+            <td mat-cell *matCellDef="let element">{{ element.fuelType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Engine layout">
+            <th mat-header-cell *matHeaderCellDef class="header">Engine layout</th>
+            <td mat-cell *matCellDef="let element">{{ element.engineLayout }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Stroke type">
+            <th mat-header-cell *matHeaderCellDef class="header">Stroke type</th>
+            <td mat-cell *matCellDef="let element">{{ element.strokeType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Number of cylinders">
+            <th mat-header-cell *matHeaderCellDef class="header">NO of cylinders</th>
+            <td mat-cell *matCellDef="let element">
+                {{ element.numberOfCylinders }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Has turbine">
+            <th mat-header-cell *matHeaderCellDef class="header">Turbine</th>
+            <td mat-cell *matCellDef="let element">
+                {{ element.hasTurbine ? "Yes" : "No" }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Has supercharge">
+            <th mat-header-cell *matHeaderCellDef class="header">Supercharge</th>
+            <td mat-cell *matCellDef="let element">
+                {{ element.hasSupercharge ? "Yes" : "No" }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Actions">
+            <th mat-header-cell *matHeaderCellDef class="header">Actions</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-stroked-button color="primary" class="space-right" (click)="edit(element.id)">Edit</button>
+                <button mat-stroked-button color="primary" (click)="delete(element.id)">Delete</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <div class="fab-button">
+        <button
+            mat-fab
+            color="primary"
+            title="Add new ICE engine"
+            aria-label="Example icon button with a heart icon"
+            (click)="addFosilFuelEngine()"
+        >
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>

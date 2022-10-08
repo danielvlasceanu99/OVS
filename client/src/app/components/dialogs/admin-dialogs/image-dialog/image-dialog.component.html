@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Add a new image</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="imageFormGroup">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Post</mat-label>
+            <mat-select formControlName="postFormControl">
+                <mat-option *ngFor="let item of posts" value="{{ item.id }}">{{ item.title }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="postFormControl?.errors?.['required']"> The post is required! </mat-error>
+        </mat-form-field>
+
+        <div class="no-image-container" *ngIf="!image">
+            <mat-icon class="placeholder-image">image</mat-icon>
+            <p>No image selected</p>
+            <button mat-stroked-button color="primary" (click)="openFile()">Select an Image</button>
+            <input id="image" type="file" style="display: none" (change)="handle($event)" />
+        </div>
+        <ng-container *ngIf="image">
+            <div class="image-container">
+                <img src="{{ localUrl }}" alt="{{ image.name }}" />
+            </div>
+            <button mat-stroked-button color="primary" (click)="clearImage()">Delete Image</button>
+        </ng-container>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button cdkFocusInitial mat-dialog-close>Cancel</button>
+    <button mat-button [disabled]="imageFormGroup.invalid || this.image === null" (click)="addImage()">Add</button>
+</mat-dialog-actions>

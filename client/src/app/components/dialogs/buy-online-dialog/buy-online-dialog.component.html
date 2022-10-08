@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>Card information</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="example-form" [formGroup]="buyOnlineFromGroup">
+        <mat-form-field class="example-full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Card number</mat-label>
+            <input
+                type="text"
+                matInput
+                formControlName="cardNumber"
+                (keyup)="creditCardNumberSpacing()"
+                maxlength="19"
+            />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill" hideRequiredMarker="true">
+            <mat-label>Cardholder name</mat-label>
+            <input type="text" matInput formControlName="cardholderName" />
+            <mat-hint align="end">{{ cardholderName?.value.length }}/50</mat-hint>
+
+            <mat-error *ngIf="cardholderName?.errors?.['minlength']">
+                The cardholder name must have at least 3 letters!
+            </mat-error>
+            <mat-error *ngIf="cardholderName?.errors?.['maxlength']">
+                The cardholder name must have less than 50 letters!
+            </mat-error>
+            <mat-error *ngIf="cardholderName?.errors?.['required']"> The cardholder name is required! </mat-error>
+        </mat-form-field>
+
+        <div class="field-group">
+            <div class="field">
+                <mat-form-field>
+                    <input
+                        matInput
+                        [matDatepicker]="dp2"
+                        [min]="minDate"
+                        [max]="maxDate"
+                        placeholder="Select a Date"
+                        ormControlName="expirationDate"
+                        (click)="dp2.open()"
+                    />
+                    <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                    <mat-datepicker #dp2 startView="year"></mat-datepicker>
+                    <mat-error *ngIf="expirationDate?.errors?.['required']"> The date is required </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="field">
+                <mat-form-field class="example-full-width" appearance="fill" hideRequiredMarker="true">
+                    <mat-label>CVV</mat-label>
+                    <input type="number" matInput formControlName="cvv" />
+
+                    <mat-error *ngIf="cvv?.errors?.['minlength']"> The CVV must have 3 characters! </mat-error>
+                    <mat-error *ngIf="cvv?.errors?.['maxlength']"> The CVV must have 3 characters! </mat-error>
+                    <mat-error *ngIf="cvv?.errors?.['required']"> The CVV is required! </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial (click)="buyOnline()" [disabled]="buyOnlineFromGroup.invalid">BUY ONLINE</button>
+</mat-dialog-actions>
