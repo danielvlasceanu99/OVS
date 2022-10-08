@@ -1,9 +1,5 @@
 # Online Vehicle Shop
 ## _Angular_ _and_ _Spring_ _version of OVS_
-[![N|Solid](https://appian.com/content/appian-aem/it_it/resources/partners/all-partners/crystal-system-group-ltd-/_jcr_content/root/container/container_1705898074/image.coreimg.png/1626920403797/crystal-system-logo.png)](https://www.crystal-system.eu/)
-[![N|Solid](https://humansinlearning.ro/wp-content/uploads/2020/02/logo-humans-in-learning.png)](https://humansinlearning.ro/)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://github.com/humansinlearning/OVS-WEB)
 
 Online vehicle shop is a dealership website template in which a dealership can put their cars for sale online.
 
@@ -59,8 +55,3 @@ npm install -g @angular/cli
 npm i
 ng serve
 ```
-
-## Development
-[Documentation that will be added](http://conf.crystal-system.eu/display/DE/OnlineVehicleShop)
-
-
